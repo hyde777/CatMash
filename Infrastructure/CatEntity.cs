@@ -4,8 +4,10 @@ namespace Infrastructure;
 
 internal class CatEntity
 {
-    public async Task<ICat> MapToCat()
+    public ICat MapToCat()
     {
         throw new NotImplementedException();
     }
+
+    public uint CountVote { get; set; }
 }

@@ -5,14 +5,30 @@ namespace Infrastructure;
 public class InMemoryCatRepository : ICatRepository
 {
     private Dictionary<Guid, CatEntity> _cats = new();
-
-    public Task<ICat> Get(Guid id)
+    
+    public async Task<ICat> Get(Guid id)
     {
         return _cats[id].MapToCat();
     }
 
-    public Task Update(Guid id, uint currentVote)
+    public async Task Update(Guid id, uint currentVote)
     {
-        throw new NotImplementedException();
+        var catEntity = _cats[id];
+        catEntity.CountVote = currentVote;
+        _cats[id] = catEntity;
+    }
+
+    public async Task<List<ICat>> GetRandom(int count)
+    {
+        Random random = new Random();
+        List<ICat> cats = new List<ICat>();
+        for (int i = 0; i < count; i++)
+        {
+            var randomIndex = random.Next(_cats.Count);
+            var randomCat = _cats.ToList()[randomIndex].Value;
+            cats.Add(randomCat.MapToCat());
+        }
+
+        return cats;
     }
 }
