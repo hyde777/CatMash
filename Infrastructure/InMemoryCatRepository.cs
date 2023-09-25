@@ -8,10 +8,11 @@ public class InMemoryCatRepository : ICatRepository
 
     public Task<ICat> Get(Guid id)
     {
+        return _cats[id].MapToCat();
+    }
+
+    public Task Update(Guid id, uint currentVote)
+    {
         throw new NotImplementedException();
     }
-}
-
-internal class CatEntity
-{
 }
