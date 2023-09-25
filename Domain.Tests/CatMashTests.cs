@@ -29,7 +29,7 @@ public class CatMashTests
     }
 
     [Test]
-    public async Task GiveAChoice()
+    public async Task Should_Give_A_Cat_Mash()
     {
         var cat1 = Substitute.For<ICat>();
         var cat2 = Substitute.For<ICat>();
