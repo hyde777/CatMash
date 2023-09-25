@@ -1,3 +1,4 @@
+using FluentAssertions;
 using NSubstitute;
 using NSubstitute.ReceivedExtensions;
 
@@ -24,6 +25,22 @@ public class CatMashTests
 
         await _catmash.Vote(id);
 
-        cat.Received(1).EarnAVote();
+        await cat.Received(1).EarnAVote();
+    }
+
+    [Test]
+    public async Task GiveAChoice()
+    {
+        var cat1 = Substitute.For<ICat>();
+        var cat2 = Substitute.For<ICat>();
+        _repository.GetRandom(2).Returns(new List<ICat>
+        {
+            cat1,
+            cat2
+        });
+        
+        (ICat, ICat) mash = await _catmash.Mash();
+
+        mash.Should().Be((cat1, cat2));
     }
 }

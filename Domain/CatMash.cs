@@ -12,6 +12,12 @@ public class CatMash
     public async Task Vote(Guid id)
     {
         var cat = await _repository.Get(id);
-        cat.EarnAVote();
+        await cat.EarnAVote();
+    }
+
+    public async Task<(ICat, ICat)> Mash()
+    {
+        var random = await _repository.GetRandom(2);
+        return (random[0], random[1]);
     }
 }
