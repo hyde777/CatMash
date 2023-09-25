@@ -2,5 +2,5 @@
 
 public interface ICat
 {
-    void EarnAVote();
+    Task EarnAVote();
 }

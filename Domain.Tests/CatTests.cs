@@ -13,7 +13,7 @@ public class CatTests
         ICatRepository repository = Substitute.For<ICatRepository>();
         Cat cat = new Cat(repository, id, currentVote);
 
-        cat.EarnAVote();
+        await cat.EarnAVote();
 
         await repository.Received(1).Update(id, currentVote + 1);
     }
