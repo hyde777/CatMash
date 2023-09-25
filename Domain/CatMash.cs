@@ -13,6 +13,5 @@ public class CatMash
     {
         var cat = await _repository.Get(id);
         cat.EarnAVote();
-        await _repository.Update(cat);
     }
 }

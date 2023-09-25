@@ -25,6 +25,5 @@ public class CatMashTests
         await _catmash.Vote(id);
 
         cat.Received(1).EarnAVote();
-        await _repository.Received(1).Update(cat);
     }
 }

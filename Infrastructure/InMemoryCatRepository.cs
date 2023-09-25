@@ -2,15 +2,16 @@
 
 namespace Infrastructure;
 
-public class CatRepository : ICatRepository
+public class InMemoryCatRepository : ICatRepository
 {
-    public Task Update(ICat cat)
-    {
-        throw new NotImplementedException();
-    }
+    private Dictionary<Guid, CatEntity> _cats = new();
 
     public Task<ICat> Get(Guid id)
     {
         throw new NotImplementedException();
     }
+}
+
+internal class CatEntity
+{
 }
