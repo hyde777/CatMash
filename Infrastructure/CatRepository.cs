@@ -1,4 +1,6 @@
-﻿namespace Domain.Tests;
+﻿using Domain;
+
+namespace Infrastructure;
 
 public class CatRepository : ICatRepository
 {
