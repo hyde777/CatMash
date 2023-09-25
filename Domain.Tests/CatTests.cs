@@ -1,20 +1,27 @@
-﻿using Infrastructure;
-using NSubstitute;
+﻿using NSubstitute;
 
 namespace Domain.Tests;
 
 public class CatTests
 {
+    private ICatRepository _repository;
+
+    [SetUp]
+    public void Setup()
+    {
+        _repository = Substitute.For<ICatRepository>();
+    }
+
     [Test]
-    public async Task RenameMe()
+    public async Task Should_Update_His_Current_Vote_When_He_Earn_A_Vote()
     {
         Guid id = Guid.NewGuid();
-        uint currentVote = 3;
-        ICatRepository repository = Substitute.For<ICatRepository>();
-        Cat cat = new Cat(repository, id, currentVote);
+        uint currentVoteCount = 3;
+        Cat cat = new Cat(_repository, id, currentVoteCount);
 
         await cat.EarnAVote();
 
-        await repository.Received(1).Update(id, currentVote + 1);
+        var updateVoteCount = currentVoteCount + 1;
+        await _repository.Received(1).Update(id, updateVoteCount);
     }
 }
