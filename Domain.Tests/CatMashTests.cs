@@ -5,64 +5,26 @@ namespace Domain.Tests;
 
 public class CatMashTests
 {
+    private ICatRepository _repository;
+    private CatMash _catmash;
+
     [SetUp]
     public void Setup()
     {
+        _repository = Substitute.For<ICatRepository>();
+        _catmash = new CatMash(_repository);
     }
 
     [Test]
-    public async Task RenameMe()
+    public async Task Should_Vote_A_Cat_By_His_Id()
     {
         ICat cat = Substitute.For<ICat>();
-        ICatRepository repository = Substitute.For<ICatRepository>();
         Guid id = Guid.NewGuid();
-        repository.Get(id).Returns(cat);
-        CatMash catmash = new CatMash(repository);
+        _repository.Get(id).Returns(cat);
 
-        await catmash.Vote(id);
+        await _catmash.Vote(id);
 
         cat.Received(1).EarnAVote();
-        await repository.Received(1).Update(cat);
+        await _repository.Received(1).Update(cat);
     }
-}
-
-public class CatMash
-{
-    private readonly ICatRepository _repository;
-
-    public CatMash(ICatRepository repository)
-    {
-        _repository = repository;
-    }
-
-    public async Task Vote(Guid id)
-    {
-        var cat = await _repository.Get(id);
-        cat.EarnAVote();
-        await _repository.Update(cat);
-    }
-}
-
-public class CatRepository : ICatRepository
-{
-    public Task Update(ICat cat)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<ICat> Get(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-public interface ICatRepository
-{
-    Task Update(ICat cat);
-    Task<ICat> Get(Guid id);
-}
-
-public interface ICat
-{
-    void EarnAVote();
 }
