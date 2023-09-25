@@ -43,4 +43,23 @@ public class CatMashTests
 
         mash.Should().Be((cat1, cat2));
     }
+
+    [Test]
+    public async Task Should_Initialize_Datas()
+    {
+        ICatMashApi api = Substitute.For<ICatMashApi>();
+        var catDtos = new List<CatDto>
+        {
+            new CatDto
+            {
+                Id = idFromApi,
+                Image = urlOfCat
+            }
+        };
+        api.GetAll().Returns(catDtos);
+
+        _catmash.Initialise();
+        
+        await _repository.Received(1).Import(catDtos)
+    }
 }
