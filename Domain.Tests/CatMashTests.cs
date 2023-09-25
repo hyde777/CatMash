@@ -14,10 +14,10 @@ public class CatMashTests
     public async Task RenameMe()
     {
         ICat cat = Substitute.For<ICat>();
-        ICatRepository repository = new CatRepository();
+        ICatRepository repository = Substitute.For<ICatRepository>();
         Guid id = Guid.NewGuid();
         repository.Get(id).Returns(cat);
-        CatMash catmash = new CatMash();
+        CatMash catmash = new CatMash(repository);
 
         await catmash.Vote(id);
 
@@ -28,9 +28,18 @@ public class CatMashTests
 
 public class CatMash
 {
+    private readonly ICatRepository _repository;
+
+    public CatMash(ICatRepository repository)
+    {
+        _repository = repository;
+    }
+
     public async Task Vote(Guid id)
     {
-        throw new NotImplementedException();
+        var cat = await _repository.Get(id);
+        cat.EarnAVote();
+        await _repository.Update(cat);
     }
 }
 
