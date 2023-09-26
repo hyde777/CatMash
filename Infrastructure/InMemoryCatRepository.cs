@@ -8,7 +8,7 @@ public class InMemoryCatRepository : ICatRepository
     
     public async Task<ICat> Get(Guid id)
     {
-        return _cats[id].MapToCat(id);
+        return _cats[id].MapToCat(this, id);
     }
 
     public async Task Update(Guid id, uint currentVote)
@@ -27,7 +27,7 @@ public class InMemoryCatRepository : ICatRepository
             var randomIndex = random.Next(_cats.Count);
             var keyValuePair = _cats.ToList()[randomIndex];
             var randomCat = keyValuePair.Value;
-            cats.Add(randomCat.MapToCat(keyValuePair.Key));
+            cats.Add(randomCat.MapToCat(this, keyValuePair.Key));
         }
 
         return cats;
@@ -46,6 +46,6 @@ public class InMemoryCatRepository : ICatRepository
 
     public async Task<List<ICat>> GetAll()
     {
-        return _cats.Select(kvp => kvp.Value.MapToCat(kvp.Key)).ToList();
+        return _cats.Select(kvp => kvp.Value.MapToCat(this,kvp.Key)).ToList();
     }
 }

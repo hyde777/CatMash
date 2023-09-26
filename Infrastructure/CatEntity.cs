@@ -4,9 +4,9 @@ namespace Infrastructure;
 
 internal class CatEntity
 {
-    public ICat MapToCat(Guid argKey)
+    public ICat MapToCat(ICatRepository repository, Guid argKey)
     {
-        throw new NotImplementedException();
+        return new Cat(repository, argKey, CountVote, ImageUrl);
     }
 
     public uint CountVote { get; set; }
