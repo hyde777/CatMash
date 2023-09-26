@@ -34,9 +34,10 @@ public class InMemoryCatRepository : ICatRepository
 
     public async Task Import(List<CatDto> catDtos)
     {
+        uint initialCount = 0;
         _cats = catDtos.Select(dto => new CatEntity
         {
-            CountVote = 0,
+            CountVote = initialCount,
             ImageUrl = dto.Image,
             ExternalId = dto.Id,
         }).ToDictionary(_ => Guid.NewGuid(), x => x);
