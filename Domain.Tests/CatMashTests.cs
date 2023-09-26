@@ -51,9 +51,9 @@ public class CatMashTests
     {
         string idFromApi = "azerty";
         string urlOfCat = "http://25.media.tumblr.com/tumblr_m2p6dxhxul1qdvz31o1_500.jpg";
-        var catDtos = new List<CatDto>
+        var catDtos = new List<CatDtoFromApi>
         {
-            new CatDto
+            new CatDtoFromApi
             {
                 Id = idFromApi,
                 Image = urlOfCat

@@ -2,5 +2,5 @@
 
 public interface ICatMashApi
 {
-    Task<List<CatDto>> GetAll();
+    Task<List<CatDtoFromApi>> GetAll();
 }

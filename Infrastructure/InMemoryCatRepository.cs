@@ -32,7 +32,7 @@ public class InMemoryCatRepository : ICatRepository
         return cats;
     }
 
-    public async Task Import(List<CatDto> catDtos)
+    public async Task Import(List<CatDtoFromApi> catDtos)
     {
         uint initialCount = 0;
         _cats = catDtos.Select(dto => new CatEntity
