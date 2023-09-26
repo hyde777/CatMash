@@ -56,7 +56,7 @@ public class CatMashTests
             new CatDtoFromApi
             {
                 Id = idFromApi,
-                Image = urlOfCat
+                ImageUrl = urlOfCat
             }
         };
         _api.GetAll().Returns(catDtos);

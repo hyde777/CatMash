@@ -2,7 +2,7 @@
 
 public class CatDto
 {
-    public string Image { get; set; }
+    public string ImageUrl { get; set; }
     public uint Votes { get; set; }
     public Guid Id { get; set; }
 }

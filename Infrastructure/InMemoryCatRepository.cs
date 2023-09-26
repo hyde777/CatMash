@@ -39,7 +39,7 @@ public class InMemoryCatRepository : ICatRepository
         _cats = catDtos.Select(dto => new CatEntity
         {
             CountVote = initialCount,
-            ImageUrl = dto.Image,
+            ImageUrl = dto.ImageUrl,
             ExternalId = dto.Id,
         }).ToDictionary(_ => Guid.NewGuid(), x => x);
     }

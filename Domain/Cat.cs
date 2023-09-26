@@ -26,7 +26,7 @@ public class Cat : ICat
     {
         return new CatDto
         {
-            Image = _imageUrl,
+            ImageUrl = _imageUrl,
             Votes = _currentVote,
             Id = _id
         };

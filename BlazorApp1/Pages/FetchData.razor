@@ -29,7 +29,7 @@ else
         @foreach (var cat in cats)
         {
             <tr>
-                <td>@cat.Image</td>
+                <td>@cat.ImageUrl</td>
                 <td>@cat.Votes</td>
             </tr>
         }
@@ -42,6 +42,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        await CatMash.Initialise();
         List<CatDto> catDtos = await CatMash.GetAll();
         cats = catDtos.ToArray();
     }

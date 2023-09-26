@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using Domain;
+using Newtonsoft.Json;
 
 namespace Infrastructure;
 
@@ -16,8 +17,8 @@ public class CatMashApi : ICatMashApi
     {
         var getAll = "https://latelier.co/data/cats.json";
         HttpResponseMessage httpResponseMessage = await _client.GetAsync(getAll);
-        var readAsStreamAsync = await httpResponseMessage.Content.ReadAsStreamAsync();
-        var catDtoFromApis = await JsonSerializer.DeserializeAsync<List<CatDtoFromApi>>(readAsStreamAsync);
-        return catDtoFromApis;
+        var readAsStreamAsync = await httpResponseMessage.Content.ReadAsStringAsync();
+        var catDtoFromApis = JsonConvert.DeserializeObject<CatDtos>(readAsStreamAsync);
+        return catDtoFromApis.dtos;
     }
 }
