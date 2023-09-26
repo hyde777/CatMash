@@ -31,4 +31,14 @@ public class InMemoryCatRepository : ICatRepository
 
         return cats;
     }
+
+    public async Task Import(List<CatDto> catDtos)
+    {
+        _cats = catDtos.Select(dto => new CatEntity
+        {
+            CountVote = 0,
+            ImageUrl = dto.Image,
+            ExternalId = dto.Id,
+        }).ToDictionary(_ => Guid.NewGuid(), x => x);
+    }
 }

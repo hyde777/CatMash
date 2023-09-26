@@ -10,4 +10,6 @@ internal class CatEntity
     }
 
     public uint CountVote { get; set; }
+    public string ImageUrl { get; set; }
+    public string ExternalId { get; set; }
 }
