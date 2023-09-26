@@ -28,4 +28,10 @@ public class CatMash
         var catDtos = await _catMashApi.GetAll();
         await _repository.Import(catDtos);
     }
+
+    public async Task<List<CatDto>> GetAll()
+    {
+        var cats = (await _repository.GetAll());
+        return cats.Select(c => c.ToDto()).ToList();
+    }
 }

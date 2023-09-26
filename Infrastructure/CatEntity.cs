@@ -4,7 +4,7 @@ namespace Infrastructure;
 
 internal class CatEntity
 {
-    public ICat MapToCat()
+    public ICat MapToCat(Guid argKey)
     {
         throw new NotImplementedException();
     }

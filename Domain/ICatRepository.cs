@@ -6,4 +6,5 @@ public interface ICatRepository
     Task Update(Guid id, uint currentVote);
     Task<List<ICat>> GetRandom(int count);
     Task Import(List<CatDtoFromApi> catDtos);
+    Task<List<ICat>> GetAll();
 }

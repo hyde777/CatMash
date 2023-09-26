@@ -3,4 +3,5 @@
 public interface ICat
 {
     Task EarnAVote();
+    CatDto ToDto();
 }

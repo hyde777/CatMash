@@ -1,13 +1,17 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using BlazorApp1.Data;
+using Domain;
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddSingleton<CatMash>();
+builder.Services.AddSingleton<ICatRepository, InMemoryCatRepository>();
+builder.Services.AddHttpClient<ICatMashApi, CatMashApi>();
 
 var app = builder.Build();
 

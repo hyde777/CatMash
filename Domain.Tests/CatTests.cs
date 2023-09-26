@@ -17,7 +17,7 @@ public class CatTests
     {
         Guid id = Guid.NewGuid();
         uint currentVoteCount = 3;
-        Cat cat = new Cat(_repository, id, currentVoteCount);
+        Cat cat = new Cat(_repository, id, currentVoteCount, "imageUrl");
 
         await cat.EarnAVote();
 
