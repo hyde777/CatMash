@@ -20,4 +20,9 @@ public class CatMash
         var random = await _repository.GetRandom(2);
         return (random[0], random[1]);
     }
+
+    public async Task Initialise()
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -48,6 +48,8 @@ public class CatMashTests
     public async Task Should_Initialize_Datas()
     {
         ICatMashApi api = Substitute.For<ICatMashApi>();
+        string idFromApi = "azerty";
+        string urlOfCat = "http://25.media.tumblr.com/tumblr_m2p6dxhxul1qdvz31o1_500.jpg";
         var catDtos = new List<CatDto>
         {
             new CatDto
@@ -58,8 +60,8 @@ public class CatMashTests
         };
         api.GetAll().Returns(catDtos);
 
-        _catmash.Initialise();
-        
-        await _repository.Received(1).Import(catDtos)
+        await _catmash.Initialise();
+
+        await _repository.Received(1).Import(catDtos);
     }
 }
