@@ -8,12 +8,14 @@ public class CatMashTests
 {
     private ICatRepository _repository;
     private CatMash _catmash;
+    private ICatMashApi _api;
 
     [SetUp]
     public void Setup()
     {
+        _api = Substitute.For<ICatMashApi>();
         _repository = Substitute.For<ICatRepository>();
-        _catmash = new CatMash(_repository);
+        _catmash = new CatMash(_repository, _api);
     }
 
     [Test]
@@ -47,7 +49,6 @@ public class CatMashTests
     [Test]
     public async Task Should_Initialize_Datas()
     {
-        ICatMashApi api = Substitute.For<ICatMashApi>();
         string idFromApi = "azerty";
         string urlOfCat = "http://25.media.tumblr.com/tumblr_m2p6dxhxul1qdvz31o1_500.jpg";
         var catDtos = new List<CatDto>
@@ -58,7 +59,7 @@ public class CatMashTests
                 Image = urlOfCat
             }
         };
-        api.GetAll().Returns(catDtos);
+        _api.GetAll().Returns(catDtos);
 
         await _catmash.Initialise();
 

@@ -3,10 +3,12 @@
 public class CatMash
 {
     private readonly ICatRepository _repository;
+    private readonly ICatMashApi _catMashApi;
 
-    public CatMash(ICatRepository repository)
+    public CatMash(ICatRepository repository, ICatMashApi catMashApi)
     {
         _repository = repository;
+        _catMashApi = catMashApi;
     }
 
     public async Task Vote(Guid id)
@@ -23,6 +25,7 @@ public class CatMash
 
     public async Task Initialise()
     {
-        throw new NotImplementedException();
+        var catDtos = await _catMashApi.GetAll();
+        await _repository.Import(catDtos);
     }
 }
