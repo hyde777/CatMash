@@ -42,7 +42,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         List<CatDto> catDtos = await CatMash.GetAll();
-        cats = catDtos.ToArray();
+        cats = catDtos.OrderByDescending(x => x.Votes).ToArray();
     }
 
 }

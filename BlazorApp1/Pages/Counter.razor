@@ -6,10 +6,15 @@
 
 <h1>Counter</h1>
 
-<img src="@catDtos.Item1.ToDto().ImageUrl" alt="@catDtos.Item1.ToDto().Id" height="100px" width="100px"/> 
+<div>
+    <img src="@catDtos.Item1.ToDto().ImageUrl" alt="@catDtos.Item1.ToDto().Id" height="100px" width="100px"/> 
+    <button class="btn btn-primary" @onclick="() => IncrementCount(catDtos.Item1)">Vote Me</button>
+</div>
 
-<button class="btn btn-primary" @onclick="() => IncrementCount(catDtos.Item1)">Click me</button>
-
+<div>
+    <img src="@catDtos.Item2.ToDto().ImageUrl" alt="@catDtos.Item2.ToDto().Id" height="100px" width="100px"/> 
+    <button class="btn btn-primary" @onclick="() => IncrementCount(catDtos.Item2)">Vote Me</button>
+</div>
 @code {
     (ICat, ICat) catDtos;
     
@@ -18,9 +23,10 @@
         catDtos = await CatMash.Mash();
     }
     
-    private void IncrementCount(ICat cat)
+    private async Task IncrementCount(ICat cat)
     {
-        cat.EarnAVote();
+        await cat.EarnAVote();
+        catDtos = await CatMash.Mash();
     }
 
 }
