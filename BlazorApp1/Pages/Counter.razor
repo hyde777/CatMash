@@ -1,19 +1,26 @@
 ﻿@page "/counter"
+@using Domain
+@inject CatMash CatMash
 
 <PageTitle>Counter</PageTitle>
 
 <h1>Counter</h1>
 
-<p role="status">Current count: @currentCount</p>
+<img src="@catDtos.Item1.ToDto().ImageUrl" alt="@catDtos.Item1.ToDto().Id" height="100px" width="100px"/> 
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<button class="btn btn-primary" @onclick="() => IncrementCount(catDtos.Item1)">Click me</button>
 
 @code {
-    private int currentCount = 0;
-
-    private void IncrementCount()
+    (ICat, ICat) catDtos;
+    
+    protected override async Task OnInitializedAsync()
     {
-        currentCount++;
+        catDtos = await CatMash.Mash();
+    }
+    
+    private void IncrementCount(ICat cat)
+    {
+        cat.EarnAVote();
     }
 
 }
